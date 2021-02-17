@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_hoy"
+        android:icon="@drawable/ic_sol"
+        android:title="Hoy" />
+
+    <item
+        android:id="@+id/navigation_semana"
+        android:icon="@drawable/ic_calendario"
+        android:title="Semana" />
+
+    <item
+        android:id="@+id/navigation_ajustes"
+        android:icon="@drawable/ic_settings"
+        android:title="Ajustes" />
+
+</menu>

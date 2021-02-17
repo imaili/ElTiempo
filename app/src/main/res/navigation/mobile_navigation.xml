@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_hoy">
+
+    <fragment
+        android:id="@+id/navigation_hoy"
+        android:name="com.example.tiempo.ui.hoy.TiempoHoyFragment"
+        android:label="Hoy"
+        tools:layout="@layout/fragment_hoy" />
+
+    <fragment
+        android:id="@+id/navigation_semana"
+        android:name="com.example.tiempo.ui.semana.TiempoSemanaFragment"
+        android:label="Semana"
+        tools:layout="@layout/fragment_semana" />
+
+    <fragment
+        android:id="@+id/navigation_ajustes"
+        android:name="com.example.tiempo.ui.ajustes.AjustesFragment"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_ajustes" />
+</navigation>
