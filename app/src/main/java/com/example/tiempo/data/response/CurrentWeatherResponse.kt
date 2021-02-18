@@ -1,5 +1,8 @@
-package com.example.tiempo.data
+package com.example.tiempo.data.response
 
+import com.example.tiempo.data.response.Current
+import com.example.tiempo.data.response.Location
+import com.example.tiempo.data.response.Request
 import com.google.gson.annotations.SerializedName
 
 
