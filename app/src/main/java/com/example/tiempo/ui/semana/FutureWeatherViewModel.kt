@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TIempoSemanaViewModel : ViewModel() {
+class FutureWeatherViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "Esta es la ventana del tiempo de la proxima semana"

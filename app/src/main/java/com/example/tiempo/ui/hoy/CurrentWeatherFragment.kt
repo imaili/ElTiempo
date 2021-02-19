@@ -9,23 +9,36 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tiempo.R
+import com.example.tiempo.data.WeatherService
+import kotlinx.android.synthetic.main.fragment_current_weather.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class TiempoHoyFragment : Fragment() {
+class CurrentWeatherFragment : Fragment() {
 
-    private lateinit var tiempoHoyViewModel: TiempoHoyViewModel
+    private lateinit var currentWeatherViewModel: CurrentWeatherViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        tiempoHoyViewModel =
-            ViewModelProviders.of(this).get(TiempoHoyViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_hoy, container, false)
+        currentWeatherViewModel =
+            ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_current_weather, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        tiempoHoyViewModel.text.observe(viewLifecycleOwner, Observer {
+        currentWeatherViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val apiService = WeatherService()
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = apiService.getCurrentWeather("Madrid").await()
+            text_home.text = response.toString()
+        }
         return root
     }
+
+
 }

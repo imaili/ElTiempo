@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_hoy"
-        android:name="com.example.tiempo.ui.hoy.TiempoHoyFragment"
+        android:name="com.example.tiempo.ui.hoy.CurrentWeatherFragment"
         android:label="Hoy"
-        tools:layout="@layout/fragment_hoy" />
+        tools:layout="@layout/fragment_current_weather" />
 
     <fragment
         android:id="@+id/navigation_semana"
-        android:name="com.example.tiempo.ui.semana.TiempoSemanaFragment"
+        android:name="com.example.tiempo.ui.semana.FutureWeatherFragment"
         android:label="Semana"
-        tools:layout="@layout/fragment_semana" />
+        tools:layout="@layout/fragment_future_weather" />
 
     <fragment
         android:id="@+id/navigation_ajustes"
-        android:name="com.example.tiempo.ui.ajustes.AjustesFragment"
+        android:name="com.example.tiempo.ui.ajustes.SettingsFragment"
         android:label="Ajustes"
-        tools:layout="@layout/fragment_ajustes" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>

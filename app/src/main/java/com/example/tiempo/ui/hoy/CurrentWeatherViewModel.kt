@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TiempoHoyViewModel : ViewModel() {
+class CurrentWeatherViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "Esta es la ventana del tiempo de hoy"

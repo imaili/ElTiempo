@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tiempo.R
 
-class TiempoSemanaFragment : Fragment() {
+class FutureWeatherFragment : Fragment() {
 
-    private lateinit var tiempoSemanaViewModel: TIempoSemanaViewModel
+    private lateinit var tiempoSemanaViewModel: FutureWeatherViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,8 +20,8 @@ class TiempoSemanaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         tiempoSemanaViewModel =
-            ViewModelProviders.of(this).get(TIempoSemanaViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_semana, container, false)
+            ViewModelProviders.of(this).get(FutureWeatherViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_future_weather, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
         tiempoSemanaViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

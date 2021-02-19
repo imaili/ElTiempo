@@ -1,4 +1,4 @@
-package com.example.tiempo.data
+package com.example.tiempo.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
