@@ -4,41 +4,46 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tiempo.R
-import com.example.tiempo.data.WeatherService
+import com.example.tiempo.data.network.ConnectivityInterceptor
+import com.example.tiempo.data.network.WeatherNetworkDataSourceImpl
+import com.example.tiempo.data.network.WeatherService
 import kotlinx.android.synthetic.main.fragment_current_weather.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class CurrentWeatherFragment : Fragment() {
 
-    private lateinit var currentWeatherViewModel: CurrentWeatherViewModel
+    private lateinit var viewModel: CurrentWeatherViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        currentWeatherViewModel =
-            ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_current_weather, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        currentWeatherViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        return inflater.inflate(R.layout.fragment_current_weather, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
+        val apiService = WeatherService(ConnectivityInterceptor(this.requireContext()))
+        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
+
+        weatherNetworkDataSource.downloadedCurrentWeather.observe(viewLifecycleOwner, Observer {
+            text_home.text = it.toString()
         })
 
-        val apiService = WeatherService()
-        GlobalScope.launch(Dispatchers.Main) {
-            val response = apiService.getCurrentWeather("Madrid").await()
-            text_home.text = response.toString()
+        GlobalScope.launch {
+            weatherNetworkDataSource.fetchCurrentWeather("London")
         }
-        return root
+
     }
+
 
 
 }
