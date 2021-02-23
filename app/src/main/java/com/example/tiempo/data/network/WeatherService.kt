@@ -1,4 +1,4 @@
-package com.example.tiempo.data
+package com.example.tiempo.data.network
 
 import com.example.tiempo.data.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -23,13 +23,16 @@ interface WeatherService {
 
 
     companion object {
-        operator fun invoke(): WeatherService {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor): WeatherService {
             val requestInterceptor = Interceptor {
 
                 val url = it.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("access_key", API_KEY)
+                    .addQueryParameter("access_key",
+                        API_KEY
+                    )
                     .build()
                 val request = it.request()
                     .newBuilder()
@@ -41,6 +44,7 @@ interface WeatherService {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
