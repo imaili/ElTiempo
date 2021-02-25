@@ -1,4 +1,4 @@
-package com.example.tiempo.ui.ajustes
+package com.example.tiempo.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

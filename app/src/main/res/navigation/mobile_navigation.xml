@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_hoy"
-        android:name="com.example.tiempo.ui.hoy.CurrentWeatherFragment"
+        android:name="com.example.tiempo.ui.current.CurrentWeatherFragment"
         android:label="Hoy"
         tools:layout="@layout/fragment_current_weather" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_ajustes"
-        android:name="com.example.tiempo.ui.ajustes.SettingsFragment"
+        android:name="com.example.tiempo.ui.settings.SettingsFragment"
         android:label="Ajustes"
         tools:layout="@layout/fragment_settings" />
 </navigation>

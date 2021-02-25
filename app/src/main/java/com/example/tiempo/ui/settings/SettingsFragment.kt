@@ -1,4 +1,4 @@
-package com.example.tiempo.ui.ajustes
+package com.example.tiempo.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
