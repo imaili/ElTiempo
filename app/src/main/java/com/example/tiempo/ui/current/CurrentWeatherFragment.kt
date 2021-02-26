@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.tiempo.ForecastApplication
 import com.example.tiempo.R
 import com.example.tiempo.data.network.ConnectivityInterceptor
@@ -46,16 +48,63 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
-        val currentWeather = viewModel.weather.await()
+        val currentWeather = viewModel.weatgit her.await()
         currentWeather.observe(viewLifecycleOwner, Observer {
             if(it == null) return@Observer
 
-            text_current.text = it.toString()
+            group_loading.visibility = View.GONE
+            updateLocation("Los Angeles")
+            updateDateToToday()
+            updateTemperatures(it.temperature, it.feelslike)
+            updateCondition(it.weatherDescriptions[0])
+            updatePrecipitation(it.precip)
+            updateWind(it.windDir, it.windSpeed)
+            updateVisibility(it.visibility)
+
+            Glide.with(this@CurrentWeatherFragment)
+                .load("http:${it.weatherIcons[0]}")
+                .into(imageView_condition_icon)
+
+
 
         })
+    }
+
+    private fun updateVisibility(vis: Int) {
+
+    }
+
+
+    private fun updateLocation(location: String) {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = location
+    }
+
+    private fun updateDateToToday() {
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
+    }
+
+    private fun updateTemperatures(temperature: Int, feelsLike: Int) {
+        textView_temperature.text = "${temperature}ºC"
+        textView_feels_like_temperature.text = "Feels like ${feelsLike}ºC"
+    }
+
+    private fun updateCondition(condition: String) {
+        textView_condition.text = condition
+    }
+
+    private fun updatePrecipitation(precipitationVolume: Int) {
+
+        textView_precipitation.text = "Preciptiation: $precipitationVolume mm"
+    }
+
+    private fun updateWind(windDirection: String, windSpeed: Int) {
+
+        textView_wind.text = "Wind: $windDirection, $windSpeed kph"
     }
 
 
 
 
-}
+
+
+    }
