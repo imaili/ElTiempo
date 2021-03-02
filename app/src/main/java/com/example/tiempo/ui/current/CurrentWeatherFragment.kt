@@ -56,14 +56,14 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             updateLocation("Los Angeles")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelslike)
-            //updateCondition(it.weatherDescription)
+            updateCondition(it.weatherDescription)
             updatePrecipitation(it.precip)
             updateWind(it.windDir, it.windSpeed)
             updateVisibility(it.visibility)
 
-           /* Glide.with(this@CurrentWeatherFragment)
-                .load("http:${it.weatherIcon}")
-                .into(imageView_condition_icon)*/
+            Glide.with(this@CurrentWeatherFragment)
+                .load("https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png")
+                .into(imageView_condition_icon)
 
 
 

@@ -28,10 +28,10 @@ data class CurrentWeather(
     var windDir: String,
 
     var windSpeed: Int,
-/*
+
     var weatherIcon: String,
 
-    var weatherDescription: String,*/
+    var weatherDescription: String,
 
     var visibility: Int
 ) {
@@ -51,8 +51,8 @@ data class CurrentWeather(
                 entry.windDegree,
                 entry.windDir,
                 entry.windSpeed,
-                /*entry.weatherIcons[0],
-                entry.weatherDescriptions[0],*/
+                entry.weatherIcons[0],
+                entry.weatherDescriptions[0],
                 entry.visibility
             )
 
