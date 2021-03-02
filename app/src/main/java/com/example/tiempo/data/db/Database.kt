@@ -3,10 +3,11 @@ package com.example.tiempo.data.db
 import com.example.tiempo.data.db.entity.CurrentWeatherEntry
 import android.content.Context
 import androidx.room.*
+import com.example.tiempo.data.db.entity.CurrentWeather
 
 
 @Database(
-    entities = [CurrentWeatherEntry::class],
+    entities = [CurrentWeather::class],
     version = 2
 )
 
@@ -24,6 +25,7 @@ abstract class ForecastDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
                 ForecastDatabase::class.java, "forecast.db")
+                .fallbackToDestructiveMigration()
                 .build()
     }
 }

@@ -3,9 +3,7 @@ package com.example.tiempo.data.db.entity
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
-const val CURRENT_WEATHER_ID = 0
 
-@Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
 
     @SerializedName("cloudcover")
@@ -28,14 +26,10 @@ data class CurrentWeatherEntry(
     val windDir: String,
     @SerializedName("wind_speed")
     val windSpeed: Int,
-    @SerializedName("weather_icons")
+    /*@SerializedName("weather_icons")
     val weatherIcons: List<String>,
     @SerializedName("weather_icons")
-    var weatherDescriptions: List<String>,
+    var weatherDescriptions: List<String>,*/
     @SerializedName("visibility")
     var visibility: Int
-) {
-    @PrimaryKey(autoGenerate = false)
-    var id: Int = CURRENT_WEATHER_ID
-}
-
+)

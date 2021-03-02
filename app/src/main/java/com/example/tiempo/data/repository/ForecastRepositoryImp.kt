@@ -2,6 +2,7 @@ package com.example.tiempo.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.tiempo.data.db.CurrentWeatherDao
+import com.example.tiempo.data.db.entity.CurrentWeather
 import com.example.tiempo.data.db.entity.CurrentWeatherEntry
 import com.example.tiempo.data.network.WeatherNetworkDataSource
 import com.example.tiempo.data.response.CurrentWeatherResponse
@@ -23,7 +24,7 @@ class ForecastRepositoryImpl(
         }
     }
 
-    override suspend fun getCurrentWeather(): LiveData<CurrentWeatherEntry> {
+    override suspend fun getCurrentWeather(): LiveData<CurrentWeather> {
         return withContext(Dispatchers.IO) {
             initWeatherData()
             return@withContext currentWeatherDao.getWeather()
@@ -32,7 +33,7 @@ class ForecastRepositoryImpl(
 
     private fun persistFetchedCurrentWeather(fetchedWeather: CurrentWeatherResponse) {
         GlobalScope.launch(Dispatchers.IO) {
-            currentWeatherDao.insert(fetchedWeather.current)
+            currentWeatherDao.insert(CurrentWeather.fromJson(fetchedWeather.current))
         }
     }
 

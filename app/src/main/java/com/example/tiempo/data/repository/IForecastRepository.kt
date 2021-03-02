@@ -1,8 +1,9 @@
 package com.example.tiempo.data.repository
 
 import androidx.lifecycle.LiveData
+import com.example.tiempo.data.db.entity.CurrentWeather
 import com.example.tiempo.data.db.entity.CurrentWeatherEntry
 
 interface ForecastRepository {
-    suspend fun getCurrentWeather(): LiveData<CurrentWeatherEntry>
+    suspend fun getCurrentWeather(): LiveData<CurrentWeather>
 }

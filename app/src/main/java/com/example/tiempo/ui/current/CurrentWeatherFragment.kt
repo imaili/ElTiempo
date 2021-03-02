@@ -48,7 +48,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
-        val currentWeather = viewModel.weatgit her.await()
+        val currentWeather = viewModel.weather.await()
         currentWeather.observe(viewLifecycleOwner, Observer {
             if(it == null) return@Observer
 
@@ -56,14 +56,14 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             updateLocation("Los Angeles")
             updateDateToToday()
             updateTemperatures(it.temperature, it.feelslike)
-            updateCondition(it.weatherDescriptions[0])
+            //updateCondition(it.weatherDescription)
             updatePrecipitation(it.precip)
             updateWind(it.windDir, it.windSpeed)
             updateVisibility(it.visibility)
 
-            Glide.with(this@CurrentWeatherFragment)
-                .load("http:${it.weatherIcons[0]}")
-                .into(imageView_condition_icon)
+           /* Glide.with(this@CurrentWeatherFragment)
+                .load("http:${it.weatherIcon}")
+                .into(imageView_condition_icon)*/
 
 
 
