@@ -11,7 +11,7 @@
             android:title="Location"
             android:summary="The location for which the weather is displayed"
             android:defaultValue="Madrid"
-            android:dependency="USE_DEVICE_LOCATION"/>
+            />
     </androidx.preference.PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

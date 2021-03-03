@@ -1,10 +1,12 @@
 package com.example.tiempo.data.repository
 
+import android.location.Location
 import androidx.lifecycle.LiveData
 import com.example.tiempo.data.db.CurrentWeatherDao
 import com.example.tiempo.data.db.entity.CurrentWeather
 import com.example.tiempo.data.db.entity.CurrentWeatherEntry
 import com.example.tiempo.data.network.WeatherNetworkDataSource
+import com.example.tiempo.data.provider.LocationProvider
 import com.example.tiempo.data.response.CurrentWeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -15,7 +17,8 @@ import java.util.*
 
 class ForecastRepositoryImpl(
     private val currentWeatherDao: CurrentWeatherDao,
-    private val weatherNetworkDataSource: WeatherNetworkDataSource
+    private val weatherNetworkDataSource: WeatherNetworkDataSource,
+    private val locationProvider: LocationProvider
 ) : ForecastRepository {
 
     init {
@@ -31,6 +34,10 @@ class ForecastRepositoryImpl(
         }
     }
 
+    override suspend fun getWeatherLocation(): LiveData<Location> {
+        TODO("Not yet implemented")
+    }
+
     private fun persistFetchedCurrentWeather(fetchedWeather: CurrentWeatherResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             currentWeatherDao.insert(CurrentWeather.fromJson(fetchedWeather.current))
@@ -44,7 +51,7 @@ class ForecastRepositoryImpl(
 
     private suspend fun fetchCurrentWeather() {
         weatherNetworkDataSource.fetchCurrentWeather(
-            "Madrid"
+            locationProvider.getPreferredLocationString()
         )
     }
 
