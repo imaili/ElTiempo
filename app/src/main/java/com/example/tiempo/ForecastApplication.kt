@@ -1,6 +1,7 @@
 package com.example.tiempo
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.example.tiempo.data.db.ForecastDatabase
 import com.example.tiempo.data.network.ConnectivityInterceptor
 import com.example.tiempo.data.network.WeatherNetworkDataSource
@@ -21,6 +22,7 @@ class ForecastApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
     }
 
