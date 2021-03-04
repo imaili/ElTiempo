@@ -7,5 +7,5 @@ import com.example.tiempo.data.db.entity.CurrentWeatherEntry
 
 interface ForecastRepository {
     suspend fun getCurrentWeather(): LiveData<CurrentWeather>
-    suspend fun getWeatherLocation(): LiveData<Location>
+    suspend fun getWeatherLocation(): LiveData<String>
 }

@@ -7,6 +7,8 @@ import com.example.tiempo.data.network.ConnectivityInterceptor
 import com.example.tiempo.data.network.WeatherNetworkDataSource
 import com.example.tiempo.data.network.WeatherNetworkDataSourceImpl
 import com.example.tiempo.data.network.WeatherService
+import com.example.tiempo.data.provider.LocationProvider
+import com.example.tiempo.data.provider.LocationProviderImpl
 import com.example.tiempo.data.repository.ForecastRepository
 import com.example.tiempo.data.repository.ForecastRepositoryImpl
 import com.example.tiempo.ui.current.CurrentWeatherViewModelFactory
@@ -33,8 +35,9 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
         bind() from singleton { ConnectivityInterceptor(instance()) }
         bind() from singleton { WeatherService(instance()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance()) }
     }
 

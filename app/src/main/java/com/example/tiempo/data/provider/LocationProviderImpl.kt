@@ -12,7 +12,7 @@ class LocationProviderImpl(
         return hasCustomLocationChanged(lastWeatherLocation)
     }
 
-    override suspend fun getPreferredLocationString(): String {
+    override suspend fun getLocationString(): String {
         return "${getCustomLocationName()}"
     }
 

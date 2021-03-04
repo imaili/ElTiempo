@@ -2,6 +2,7 @@ package com.example.tiempo.data.repository
 
 import android.location.Location
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.tiempo.data.db.CurrentWeatherDao
 import com.example.tiempo.data.db.entity.CurrentWeather
 import com.example.tiempo.data.db.entity.CurrentWeatherEntry
@@ -21,6 +22,8 @@ class ForecastRepositoryImpl(
     private val locationProvider: LocationProvider
 ) : ForecastRepository {
 
+
+
     init {
         weatherNetworkDataSource.downloadedCurrentWeather.observeForever { newCurrentWeather ->
             persistFetchedCurrentWeather(newCurrentWeather)
@@ -34,8 +37,10 @@ class ForecastRepositoryImpl(
         }
     }
 
-    override suspend fun getWeatherLocation(): LiveData<Location> {
-        TODO("Not yet implemented")
+    override suspend fun getWeatherLocation(): LiveData<String> {
+        val location = MutableLiveData<String>()
+        location.postValue(locationProvider.getLocationString())
+        return location
     }
 
     private fun persistFetchedCurrentWeather(fetchedWeather: CurrentWeatherResponse) {
@@ -51,7 +56,7 @@ class ForecastRepositoryImpl(
 
     private suspend fun fetchCurrentWeather() {
         weatherNetworkDataSource.fetchCurrentWeather(
-            locationProvider.getPreferredLocationString()
+            locationProvider.getLocationString()
         )
     }
 
